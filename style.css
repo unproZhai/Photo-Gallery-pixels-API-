@@ -16,7 +16,7 @@ img{
   height: 100%;
   object-fit: cover;
 }
-section{
+section.bigContainer{
   min-height:100vh;
   width: 100%;
   display: flex;
@@ -24,6 +24,27 @@ section{
   justify-content: center;
   margin: 100px 0;
 }
+
+section.hero {
+  height: 60vh;
+}
+
+section.hero > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 auto;
+}
+
+section.hero {
+  background-image: url(img/bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .container{
   background-color: white;
   width: 90%;
