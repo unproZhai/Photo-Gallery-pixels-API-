@@ -41,10 +41,11 @@ class PhotoGallery{
   }
   async getImg(index){
     this.loadMore.setAttribute('data-img', 'curated');
+    this.loadPrevious.setAttribute('data-img', 'curated');
     const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=10`;
     const data = await this.fetchImages(baseURL);
     this.GenerateHTML(data.photos)
-    console.log(data)
+    // console.log(data)
   }
   async fetchImages(baseURL){
     const response = await fetch(baseURL, {
@@ -55,7 +56,7 @@ class PhotoGallery{
       }
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return data;
   }
   GenerateHTML(photos){
@@ -69,12 +70,13 @@ class PhotoGallery{
         <h3>${photo.photographer}</h3>
       </a>
       `;
-      console.log(this.galleryDIv)
+      // console.log(this.galleryDIv)
       this.galleryDIv.appendChild(item)
     })
   }
   async getSearchedImages(e){
     this.loadMore.setAttribute('data-img', 'search');
+    this.loadPrevious.setAttribute('data-img', 'search');
     e.preventDefault();
     this.galleryDIv.innerHTML='';
     const searchValue = e.target.querySelector('input').value;
@@ -85,13 +87,6 @@ class PhotoGallery{
     e.target.reset();
   }
   async getMoreSearchedImages(index){
-    // console.log(searchValue)
-    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=10`
-    const data = await this.fetchImages(baseURL);
-    // console.log(data)
-    this.GenerateHTML(data.photos);
-  }
-  async getPreviousSearchedImages(index){
     // console.log(searchValue)
     const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=10`
     const data = await this.fetchImages(baseURL);
@@ -110,14 +105,15 @@ class PhotoGallery{
     }
   }
   loadPreviousImages(e){
-    let index = --this.pageIndex;
-    const loadMoreData = e.target.getAttribute('data-img');
-    if(loadMoreData === 'curated'){
+    let index = 1;
+    (this.pageIndex <= 1) ? index = 1 : index = --this.pageIndex;
+    const loadPreviousData = e.target.getAttribute('data-img');
+    if(loadPreviousData === 'curated'){
       // load previous page for curated]
       this.getImg(index)
     }else{
       // load previous page for search
-      this.getPreviousSearchedImages(index);
+      this.getMoreSearchedImages(index);
     }
   }
 }
