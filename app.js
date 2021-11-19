@@ -9,7 +9,7 @@ burger.addEventListener('click', e => {
 
 class PhotoGallery{
   constructor(){
-    this.API_KEY = '563492ad6f9170000100000173e2617e337c415ab3c048adaa5d1ad8';
+    this.API_KEY = 'YOUR_API_KEY';
     this.galleryDIv = document.querySelector('.gallery');
     this.searchForm = document.querySelector('.header form');
     this.loadPrevious = document.querySelector('.load-previous');
